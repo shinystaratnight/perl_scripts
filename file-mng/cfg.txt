@@ -1,0 +1,142 @@
+Purpose:    Trace32 Package
+#    
+# Processor:  independent    
+# Tool chain: independent    
+# Filename:   $Source: trace32_package.cfg $    
+# Revision:   $Revision: 1.1 $    
+# Author:     $Author: Schiekofer Stefan (uid13621) (uid13621) $    
+# Date:       $Date: 2021/03/15 09:53:48CET $    
+#     
+# $Log: trace32_package.cfg  $    
+# Revision 1.1 2021/03/15 09:53:48CET Schiekofer Stefan (uid13621) (uid13621)     
+# Initial revision    
+# Member added to project /ES/FS/DA/OB1/pis/000u0/work/tools/trace32_package/cfg/project.pj    
+  
+#***************************************************************************    
+
+our $T32Config = {
+ProjName                => 'PCCU',
+VariantName             => 'MCB',
+DefaultBldDir           => '_FS_DAOB1_0U0_NORMAL',
+DefaultProcName         => 'DELIVERY_PACKAGE',
+ZipFiles                => [
+{
+ZipSwName               => '0',
+# rem create delivery package in _FS_DAOB1_0U0_NORMAL\out\release
+# %prodlabel% = e.g. PCCU-2117a-212110 : to be parsed from work\tools\cnf\cnf\logistic.cfg - $ProjName_{NC_DC_NCD_NR}_{NC_DC_SW_VER}
+# %commondeliveryname% = e.g. 200 : to be parsed from work\tools\cnf\cnf\logistic.cfg - {NC_DELIVERY}
+# %variant% = MCB : $VariantName
+# %sourcename% : e.g. FS_DAOB1_000U0_200 : first parse $Src with GetFilePath and then take the basename without fileextension of it
+FolderCopy              => [ 
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\cal\FS_?????_000U0_???.a2l',
+                                Dest    => 'Release_%prodlabel%-OB1_%commondeliveryname%\%prodlabel%-OB1_000U0_%sourcename[15:17]%.a2l'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\cal\FS_?????_000U0_???_CANape.a2l',
+                                Dest    => 'Release_%prodlabel%-OB1_%commondeliveryname%\%prodlabel%-OB1_000U0_%sourcename[15:17]%_CANape.a2l'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\code\FS_?????_000U0_???.map',
+                                Dest    => 'Production_%prodlabel%-OB1_%variant%_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\code\FS_?????_000a0_???.s19',
+                                Dest    => 'Production_%prodlabel%-OB1_%variant%_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\code\FS_?????_000d0_???.s19',
+                                Dest    => 'Production_%prodlabel%-OB1_%variant%_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => 'work\bsw\ptp\mem\config\lifm\icsp_lifm_cnf.arxml',
+                                Dest    => 'Production_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000U0_%commondeliveryname%_icsp_lifm_cnf.arxml'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\trace32\?????_000U0_???.7z',
+                                Dest    => 'Trace32_%prodlabel%-OB1_%variant%_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\delivery\FS_?????_000R0_???.s19',
+                                Dest    => 'Inca_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000R0_%commondeliveryname%.s19'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\cal\FS_?????_000U0_???.a2l',
+                                Dest    => 'Inca_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000U0_%commondeliveryname%.a2l'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\cal\FS_?????_000U0_???.a2l',
+                                Dest    => 'Inca_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000U0_%commondeliveryname%.fred'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\cal\FS_?????_000d1_???.s19',
+                                Dest    => 'Inca_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000d1_%commondeliveryname%.s19'
+
+                             },
+                             {  Src     => 'work\tools\UDS_ZenZefi_ProF\UDS_ZenZefi_ProF.zip',
+                                Dest    => 'Inca_%prodlabel%-OB1_%variant%_%commondeliveryname%\FS_DAOB1_000U0_UDS_ZenZefi_ProF_%commondeliveryname%.zip'
+	  
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\reprog\FS_?????_000d1_???.s19',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\out\reprog\FS_?????_000a1_???.s19',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\gen_xtt.bat',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\TrafoCoApp.zip',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\%sourcename%'
+	  
+                             },
+                             {  Src     => 'work\tools\xtt\cnf\xtt__odx-f_ASW.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\cnf\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\cnf\xtt__odx-f_ASW_1B.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\cnf\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\cnf\xtt__odx-f_CAL.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\cnf\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\cnf\xtt__odx-f_CAL_1B.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\cnf\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\xtt\cnf\xtt__odx-f_config.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\cnf\%sourcename%'
+
+                             },
+                             {  Src     => 'work\tools\cnf\cnf\logistic.cfg',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\in\cnf\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\proc\S2A\out\ckscalc\S2A_Gen_CRC_ASW.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\in\s2a\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\proc\S2A\out\ckscalc\S2A_Gen_CRC_CAL.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\in\s2a\%sourcename%'
+	
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\proc\S2A\out\ckscalc\S2A_Gen_CRC_ASW_1B.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\in\s2a\%sourcename%'
+
+                             },
+                             {  Src     => '_FS_DAOB1_0U0_NORMAL\proc\S2A\out\ckscalc\S2A_Gen_CRC_CAL_1B.xml',
+                                Dest    => 'Monaco_%prodlabel%-OB1_%commondeliveryname%\in\s2a\%sourcename%'
+							}
+
+							 
+                           ],
+MergeZips               => [ 
+                           ]
+
+}
+]
+};    
